@@ -19,7 +19,6 @@ eureka:
 
 logging:
   level:
-    com:
-      netflix:
-        eureka: debug
-        discovery: debug
+    org:
+      springframework:
+        cloud: debug

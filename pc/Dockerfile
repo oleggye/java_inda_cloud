@@ -1,6 +1,6 @@
 FROM openjdk:8-jdk-alpine
 VOLUME /tmp
-EXPOSE 8080
+EXPOSE 8081
 EXPOSE 5005
 ENV JAVA_OPTS="-Xmx400m -Dfile.encoding=UTF-8 -agentlib:jdwp=transport=dt_socket,address=5005,server=y,suspend=n"
 ADD target/pc-1.0.0.jar app.jar

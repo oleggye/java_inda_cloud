@@ -1,3 +1,6 @@
+server:
+  port: 8081
+
 #mongo configuration
 spring:
   data:
@@ -9,7 +12,6 @@ spring:
 #eureka configuration
 eureka:
   instance:
-    hostname: localhost
     preferIpAddress: true
     lease-renewal-interval-in-seconds: 1 #for dev purpose only
     lease-expiration-duration-in-seconds: 2 #for dev purpose only
@@ -28,16 +30,15 @@ spring:
       enabled: false
   application:
     name: pc
-
-#sleuth configuration
-sleuth:
-  sampler:
-    probability: 30
+  sleuth:
+    sampler:
+      probability: 0.9
+  zipkin:
+    base-url: ${SPRING_ZIPKIN_BASEURL:http://localhost:9411}
 
 #for debugging
 logging:
   level:
     org:
       springframework:
-        cloud:
-          netflix: debug
+        cloud: debug

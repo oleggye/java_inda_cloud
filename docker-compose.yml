@@ -6,52 +6,60 @@ services:
     ports:
       - "27017:27017"
   eureka:
-    image: springcloud/eureka
+    build: discovery/
     ports:
       - "8761:8761"
-#  api_gateway:
-#    build: gateway/
-#    ports:
-#      - "5080:5005"
-#      - "8080:8080"
-#    depends_on:
-#      - eureka
-#    environment:
-#      EUREKA_INSTANCE_PREFER_IP_ADDRESS: 'true'
-#      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: 'http://eureka:8761/eureka/'
+    restart: always
+  api_gateway:
+    build: gateway/
+    ports:
+      - "5080:5005"
+      - "8080:8080"
+    depends_on:
+      - eureka
+    environment:
+      EUREKA_INSTANCE_PREFER_IP_ADDRESS: 'true'
+      EUREKA_URI: 'http://eureka:8761/eureka/'
+      SPRING_ZIPKIN_BASEURL: 'http://zipkin:9411'
+    restart: always
   pc:
     build: pc/
     ports:
       - '5010:5005'
-      - '8081:8080'
+      - '8081:8081'
     depends_on:
       - eureka
       - mongo
-#      - api_gateway
+      - api_gateway
     environment:
       SPRING_DATA_MONGODB_HOST: mongo
       EUREKA_INSTANCE_PREFER_IP_ADDRESS: 'true'
-      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: 'http://eureka:8761/eureka/'
+      EUREKA_URI: 'http://eureka:8761/eureka/'
+      SPRING_ZIPKIN_BASEURL: 'http://zipkin:9411'
   po:
     build: po/
     ports:
       - '5020:5005'
-      - '8082:8080'
+      - '8082:8082'
     links:
       - pc
     depends_on:
       - eureka
       - mongo
-#      - api_gateway
+      - api_gateway
       - pc
     environment:
       SPRING_DATA_MONGODB_HOST: mongo
       EUREKA_INSTANCE_PREFER_IP_ADDRESS: 'true'
-      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: 'http://eureka:8761/eureka/'
+      EUREKA_URI: 'http://eureka:8761/eureka/'
+      SPRING_ZIPKIN_BASEURL: 'http://zipkin:9411'
   zipkin:
     image: openzipkin/zipkin-slim
     ports:
       - "9411:9411"
+    environment:
+      - JAVA_OPTS=
+        -Dlogging.level.zipkin2=DEBUG
 networks:
   default:
     driver: bridge
