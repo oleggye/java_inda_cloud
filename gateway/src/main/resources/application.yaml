@@ -1,0 +1,46 @@
+#eureka configuration
+eureka:
+  instance:
+#    hostname: localhost
+    preferIpAddress: true
+#    lease-renewal-interval-in-seconds: 1 #for dev purpose only
+#    lease-expiration-duration-in-seconds: 2 #for dev purpose only
+  client:
+    serviceUrl:
+      defaultZone: http://eureka:8761/eureka/
+    fetchRegistry: true
+    registerWithEureka: true
+#    initial-instance-info-replication-interval-seconds: 0 #for dev purpose only
+#    instance-info-replication-interval-seconds: 1 #for dev purpose only
+#    registryFetchIntervalSeconds: 1 #for dev purpose only
+
+spring:
+  cloud:
+    config:
+      enabled: false
+  application:
+    name: gateway
+
+#zuul configuration
+zuul:
+  ignoredServices: '*'
+  routes:
+    po:
+      path: /catalog/*/order
+      stripPrefix: false #not to remove 'order' prefix from request
+    pc:
+      path: /catalog/**
+      stripPrefix: false #not to remove 'catalog' prefix from request
+
+#sleuth configuration
+sleuth:
+  sampler:
+    probability: 30
+
+#for debugging
+logging:
+  level:
+    org:
+      springframework:
+        cloud:
+          netflix: debug

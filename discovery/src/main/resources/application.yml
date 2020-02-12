@@ -1,0 +1,25 @@
+server:
+  port: 8761
+
+spring:
+  application:
+    name: eureka
+
+eureka:
+  instance:
+    hostname: localhost
+  server:
+    response-cache-update-interval-ms: 500 #for dev purpose only
+    eviction-interval-timer-in-ms: 500 #for dev purpose only
+  client:
+    register-with-eureka: false
+    fetch-registry: false
+    service-url:
+      default_zone: http://${eureka.instance.hostname}:${server.port}/eureka/
+
+logging:
+  level:
+    com:
+      netflix:
+        eureka: debug
+        discovery: debug
