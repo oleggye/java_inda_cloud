@@ -1,0 +1,13 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "/catalog"
+  },
+  "response": {
+    "status": 200,
+    "bodyFileName": "get_catalog_200.json",
+    "headers": {
+      "Content-Type": "text/json"
+    }
+  }
+}

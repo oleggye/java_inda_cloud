@@ -1,0 +1,12 @@
+{
+  "name": "Wi-fi",
+  "price": 300,
+  "_links": {
+    "self": {
+      "href": "http://172.19.0.6:8081/catalog/5e470e6971885a4373ba1516"
+    },
+    "productSpecification": {
+      "href": "http://172.19.0.6:8081/catalog/5e470e6971885a4373ba1516"
+    }
+  }
+}

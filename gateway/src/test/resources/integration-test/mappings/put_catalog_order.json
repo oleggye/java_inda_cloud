@@ -1,0 +1,13 @@
+{
+  "request": {
+    "method": "PUT",
+    "urlPattern" : "/catalog/.*/order"
+  },
+  "response": {
+    "status": 200,
+    "bodyFileName": "put_catalog_200.json",
+    "headers": {
+      "Content-Type": "text/json"
+    }
+  }
+}

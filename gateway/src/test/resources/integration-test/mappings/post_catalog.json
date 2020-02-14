@@ -1,0 +1,18 @@
+{
+  "request": {
+    "url": "/catalog",
+    "method": "POST",
+    "bodyPatterns": [
+      {
+        "equalToJson": "{\n\t\"name\": \"Wi-fi\",\n\t\"price\": 300\n}"
+      }
+    ]
+  },
+  "response": {
+    "status": 200,
+    "bodyFileName": "post_catalog_200.json",
+    "headers": {
+      "Content-Type": "text/json"
+    }
+  }
+}

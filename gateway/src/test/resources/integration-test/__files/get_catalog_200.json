@@ -1,0 +1,20 @@
+{
+  "_embedded": {
+    "productSpecifications": []
+  },
+  "_links": {
+    "self": {
+      "href": "http://192.168.208.6:8081/catalog{?page,size,sort}",
+      "templated": true
+    },
+    "profile": {
+      "href": "http://192.168.208.6:8081/profile/catalog"
+    }
+  },
+  "page": {
+    "size": 20,
+    "totalElements": 0,
+    "totalPages": 0,
+    "number": 0
+  }
+}

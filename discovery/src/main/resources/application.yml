@@ -8,9 +8,6 @@ spring:
 eureka:
   instance:
     hostname: localhost
-  server:
-    response-cache-update-interval-ms: 500 #for dev purpose only
-    eviction-interval-timer-in-ms: 500 #for dev purpose only
   client:
     register-with-eureka: false
     fetch-registry: false
@@ -21,4 +18,4 @@ logging:
   level:
     org:
       springframework:
-        cloud: debug
+        cloud: info

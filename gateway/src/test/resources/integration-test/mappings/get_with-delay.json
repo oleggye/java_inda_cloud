@@ -1,0 +1,10 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "/catalog?delayed=true"
+  },
+  "response": {
+    "status": 200,
+    "fixedDelayMilliseconds": 3000
+  }
+}

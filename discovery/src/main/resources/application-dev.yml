@@ -1,0 +1,10 @@
+eureka:
+  server:
+    response-cache-update-interval-ms: 500 #for dev purpose only
+    eviction-interval-timer-in-ms: 500 #for dev purpose only
+
+logging:
+  level:
+    org:
+      springframework:
+        cloud: debug

@@ -2,13 +2,15 @@ version: '2'
 
 services:
   mongo:
-    image: mongo
+    image: mongo:latest
     ports:
       - "27017:27017"
   eureka:
     build: discovery/
     ports:
       - "8761:8761"
+    environment:
+      SPRING_PROFILES_ACTIVE: 'dev'
     restart: always
   api_gateway:
     build: gateway/
@@ -21,26 +23,28 @@ services:
       EUREKA_INSTANCE_PREFER_IP_ADDRESS: 'true'
       EUREKA_URI: 'http://eureka:8761/eureka/'
       SPRING_ZIPKIN_BASEURL: 'http://zipkin:9411'
+      SPRING_PROFILES_ACTIVE: 'dev'
     restart: always
   pc:
     build: pc/
     ports:
       - '5010:5005'
-      - '8081:8081'
+      - '8081'
     depends_on:
       - eureka
       - mongo
       - api_gateway
     environment:
-      SPRING_DATA_MONGODB_HOST: mongo
       EUREKA_INSTANCE_PREFER_IP_ADDRESS: 'true'
       EUREKA_URI: 'http://eureka:8761/eureka/'
       SPRING_ZIPKIN_BASEURL: 'http://zipkin:9411'
+      SPRING_PROFILES_ACTIVE: 'dev'
+      SPRING_DATA_MONGODB_HOST: mongo
   po:
     build: po/
     ports:
       - '5020:5005'
-      - '8082:8082'
+      - '8082'
     links:
       - pc
     depends_on:
@@ -49,10 +53,11 @@ services:
       - api_gateway
       - pc
     environment:
-      SPRING_DATA_MONGODB_HOST: mongo
       EUREKA_INSTANCE_PREFER_IP_ADDRESS: 'true'
       EUREKA_URI: 'http://eureka:8761/eureka/'
       SPRING_ZIPKIN_BASEURL: 'http://zipkin:9411'
+      SPRING_PROFILES_ACTIVE: 'dev'
+      SPRING_DATA_MONGODB_HOST: mongo
   zipkin:
     image: openzipkin/zipkin-slim
     ports:

@@ -13,16 +13,11 @@ spring:
 eureka:
   instance:
     preferIpAddress: true
-    lease-renewal-interval-in-seconds: 1 #for dev purpose only
-    lease-expiration-duration-in-seconds: 2 #for dev purpose only
   client:
     serviceUrl:
       defaultZone: ${EUREKA_URI:http://localhost:8761/eureka}
     fetchRegistry: true
     registerWithEureka: true
-    initial-instance-info-replication-interval-seconds: 0 #for dev purpose only
-    instance-info-replication-interval-seconds: 1 #for dev purpose only
-    registryFetchIntervalSeconds: 1 #for dev purpose only
 
 spring:
   cloud:
@@ -36,9 +31,8 @@ spring:
   zipkin:
     base-url: ${SPRING_ZIPKIN_BASEURL:http://localhost:9411}
 
-#for debugging
 logging:
   level:
     org:
       springframework:
-        cloud: debug
+        cloud: info

@@ -2,16 +2,11 @@
 eureka:
   instance:
     preferIpAddress: true
-    lease-renewal-interval-in-seconds: 1 #for dev purpose only
-    lease-expiration-duration-in-seconds: 2 #for dev purpose only
   client:
     serviceUrl:
       defaultZone: ${EUREKA_URI:http://localhost:8761/eureka}
     fetchRegistry: true
     registerWithEureka: true
-    initial-instance-info-replication-interval-seconds: 0 #for dev purpose only
-    instance-info-replication-interval-seconds: 1 #for dev purpose only
-    registryFetchIntervalSeconds: 1 #for dev purpose only
 
 spring:
   cloud:
@@ -31,10 +26,15 @@ zuul:
   routes:
     po:
       path: /catalog/*/order
-      stripPrefix: false #not to remove 'order' prefix from request
+      stripPrefix: false
     pc:
       path: /catalog/**
-      stripPrefix: false #not to remove 'catalog' prefix from request
+      stripPrefix: false
+  ribbon:
+    eager-load:
+      enabled: true
+  fallback:
+    message: Sorry, something went wrong. Our minions are looking through this.
 
 hystrix:
   command:
@@ -42,16 +42,14 @@ hystrix:
       execution:
         isolation:
           thread:
-            timeoutInMilliseconds: 60000
+            timeoutInMilliseconds: 6000
 ribbon:
-  ConnectTimeout: 3000
-  ReadTimeout: 60000
+  ConnectTimeout: 1500
+  ReadTimeout: 4000
 
-#sleuth configuration
 
-#for debugging
 logging:
   level:
     org:
       springframework:
-        cloud: debug
+        cloud: info
