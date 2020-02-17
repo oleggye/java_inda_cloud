@@ -1,4 +1,4 @@
-###Technologies overview:
+### Technologies overview:
 - `Service Discovery` using Netflix Eureka.
 - `Client side load balancing` using Netflix Ribbon.
 - `API Gateway ` using Netflix Zuul. Configured routes to the both `pc` and `po` services using 
@@ -11,15 +11,15 @@ and verified using integration tests.
 to collect and display it.
 - `Containerization`. Docker images and Docker compose for automating deployment.
 
-###Pros & Cons of the current project
+### Pros & Cons of the current project
 
-####Pros
+#### Pros
 - loose coupling and high cohesion
 - environment isolation
 - great scalability and resilience potential
 - can control codebase and using technologies per service due to unified communication interface
 
-####Cons
+#### Cons
 - automation of environments scaling and management (need an Orchestrator)
 - services have to support Eureka discovery (technology restriction)
 - latency increased due to division on services
