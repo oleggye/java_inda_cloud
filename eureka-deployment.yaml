@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: eureka
+spec:
+  selector:
+    matchLabels:
+      app: eureka
+  replicas: 1
+  template:
+    spec:
+      containers:
+        - env:
+            - name: SPRING_PROFILES_ACTIVE
+              value: dev
+          image: eureka
+          name: eureka
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 8761
+          resources: {}
+      restartPolicy: Always
+    metadata:
+      labels:
+        app: eureka
+status: {}

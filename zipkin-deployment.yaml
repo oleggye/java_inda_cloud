@@ -1,0 +1,33 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert
+    kompose.version: 1.19.0 (f63a961c)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: zipkin
+  name: zipkin
+spec:
+  replicas: 1
+  strategy: {}
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert
+        kompose.version: 1.19.0 (f63a961c)
+      creationTimestamp: null
+      labels:
+        io.kompose.service: zipkin
+    spec:
+      containers:
+      - env:
+        - name: JAVA_OPTS
+          value: ' -Dlogging.level.zipkin2=DEBUG'
+        image: openzipkin/zipkin-slim
+        name: zipkin
+        ports:
+        - containerPort: 9411
+        resources: {}
+      restartPolicy: Always
+status: {}

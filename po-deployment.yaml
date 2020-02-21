@@ -1,0 +1,42 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert
+    kompose.version: 1.19.0 (f63a961c)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: po
+  name: po
+spec:
+  replicas: 1
+  strategy: {}
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert
+        kompose.version: 1.19.0 (f63a961c)
+      creationTimestamp: null
+      labels:
+        io.kompose.service: po
+    spec:
+      containers:
+      - env:
+        - name: EUREKA_INSTANCE_PREFER_IP_ADDRESS
+          value: "true"
+        - name: EUREKA_URI
+          value: http://eureka:8761/eureka/
+        - name: SPRING_DATA_MONGODB_HOST
+          value: mongo
+        - name: SPRING_PROFILES_ACTIVE
+          value: dev
+        - name: SPRING_ZIPKIN_BASEURL
+          value: http://zipkin:9411
+        image: po
+        name: po
+        ports:
+        - containerPort: 5005
+        - containerPort: 8082
+        resources: {}
+      restartPolicy: Always
+status: {}
